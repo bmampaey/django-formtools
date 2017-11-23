@@ -210,7 +210,17 @@ class WizardView(TemplateView):
         This method returns the key for the storage.
         It is extracted from the POST data or generated for GET requests
         """
-        return request.POST.get('storage_key', get_random_string())
+        if request.method == 'GET':
+            return get_random_string()
+        else:
+            management_form = ManagementForm(self.request.POST, prefix=self.prefix)
+            if management_form.is_valid():
+                return management_form.cleaned_data['storage_key']
+            else
+                raise ValidationError(
+                    _('ManagementForm data is missing or has been tampered.'),
+                    code='missing_management_form',
+                )
 
     def get_form_list(self):
         """

@@ -5,6 +5,7 @@ from django import forms
 from django.forms import ValidationError, formsets
 from django.shortcuts import redirect
 from django.utils import six
+from django.utils.crypto import get_random_string
 from django.utils.decorators import classonlymethod
 from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView
@@ -202,8 +203,14 @@ class WizardView(TemplateView):
         return kwargs
 
     def get_prefix(self, request, *args, **kwargs):
-        # TODO: Add some kind of unique id to prefix
         return normalize_name(self.__class__.__name__)
+
+    def get_storage_key(self, request, *args, **kwargs):
+        """
+        This method returns the key for the storage.
+        It is extracted from the POST data or generated for GET requests
+        """
+        return request.POST.get('storage_key', get_random_string())
 
     def get_form_list(self):
         """
@@ -240,8 +247,9 @@ class WizardView(TemplateView):
         """
         # add the storage engine to the current wizardview instance
         self.prefix = self.get_prefix(request, *args, **kwargs)
+        self.storage_key = self.get_storage_key(request, *args, **kwargs)
         self.storage = get_storage(
-            self.storage_name, self.prefix, request,
+            self.storage_name, self.storage_key, request,
             getattr(self, 'file_storage', None),
         )
         self.steps = StepsHelper(self)
@@ -573,6 +581,7 @@ class WizardView(TemplateView):
             'steps': self.steps,
             'management_form': ManagementForm(prefix=self.prefix, initial={
                 'current_step': self.steps.current,
+                'storage_key': self.storage_key,
             }),
         }
         return context

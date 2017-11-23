@@ -216,7 +216,7 @@ class WizardView(TemplateView):
             management_form = ManagementForm(self.request.POST, prefix=self.prefix)
             if management_form.is_valid():
                 return management_form.cleaned_data['storage_key']
-            else
+        else:
                 raise ValidationError(
                     _('ManagementForm data is missing or has been tampered.'),
                     code='missing_management_form',

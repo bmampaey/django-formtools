@@ -314,21 +314,25 @@ class NamedSessionWizardTests(NamedWizardTests, TestCase):
     wizard_urlname = 'nwiz_session'
     wizard_step_1_data = {
         'session_contact_wizard-current_step': 'form1',
+        'session_contact_wizard-storage_key': 'fixed key for testing',
     }
     wizard_step_data = (
         {
             'form1-name': 'Pony',
             'form1-thirsty': '2',
             'session_contact_wizard-current_step': 'form1',
+            'session_contact_wizard-storage_key': 'fixed key for testing',
         },
         {
             'form2-address1': '123 Main St',
             'form2-address2': 'Djangoland',
             'session_contact_wizard-current_step': 'form2',
+            'session_contact_wizard-storage_key': 'fixed key for testing',
         },
         {
             'form3-random_crap': 'blah blah',
             'session_contact_wizard-current_step': 'form3',
+            'session_contact_wizard-storage_key': 'fixed key for testing',
         },
         {
             'form4-INITIAL_FORMS': '0',
@@ -337,6 +341,7 @@ class NamedSessionWizardTests(NamedWizardTests, TestCase):
             'form4-0-random_crap': 'blah blah',
             'form4-1-random_crap': 'blah blah',
             'session_contact_wizard-current_step': 'form4',
+            'session_contact_wizard-storage_key': 'fixed key for testing',
         }
     )
 
@@ -346,21 +351,25 @@ class NamedCookieWizardTests(NamedWizardTests, TestCase):
     wizard_urlname = 'nwiz_cookie'
     wizard_step_1_data = {
         'cookie_contact_wizard-current_step': 'form1',
+        'cookie_contact_wizard-storage_key': 'fixed key for testing',
     }
     wizard_step_data = (
         {
             'form1-name': 'Pony',
             'form1-thirsty': '2',
             'cookie_contact_wizard-current_step': 'form1',
+            'cookie_contact_wizard-storage_key': 'fixed key for testing',
         },
         {
             'form2-address1': '123 Main St',
             'form2-address2': 'Djangoland',
             'cookie_contact_wizard-current_step': 'form2',
+            'cookie_contact_wizard-storage_key': 'fixed key for testing',
         },
         {
             'form3-random_crap': 'blah blah',
             'cookie_contact_wizard-current_step': 'form3',
+            'cookie_contact_wizard-storage_key': 'fixed key for testing',
         },
         {
             'form4-INITIAL_FORMS': '0',
@@ -369,6 +378,7 @@ class NamedCookieWizardTests(NamedWizardTests, TestCase):
             'form4-0-random_crap': 'blah blah',
             'form4-1-random_crap': 'blah blah',
             'cookie_contact_wizard-current_step': 'form4',
+            'cookie_contact_wizard-storage_key': 'fixed key for testing',
         }
     )
 

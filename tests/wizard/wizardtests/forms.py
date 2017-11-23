@@ -37,6 +37,9 @@ Page4 = formset_factory(Page3, extra=2)
 class ContactWizard(WizardView):
     file_storage = temp_storage
 
+    def get_storage_key(self, request, *args, **kwargs):
+        return 'fixed key for testing'
+
     def done(self, form_list, **kwargs):
         c = Context({
             'form_list': [x.cleaned_data for x in form_list],
